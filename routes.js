@@ -47,7 +47,8 @@ router.post('/botHandler',function(req, res){
 function sessionEndedRequest(req){
 }
 function intentRequest(req){
-	return new Promise(function(resolve, reject){			
+	return new Promise(function(resolve, reject){	
+		console.log(req.body.request.intent.slots.course.value);
 		getCareerResponse(req.body.request.intent.slots.course.value.toLowerCase());
 		then((resp)=>{
 			console.log(resp);
@@ -75,18 +76,18 @@ function launchRequest(req){
 }
 
 function getCareerResponse(courseName){
-	return new Promise(function(resolve, reject){		
+	return new Promise(function(resolve, reject){
+			console.log(courseName);
 		var keys  = Object.keys(careerConfig[courseName]);
 		var responseText = "After SSC, there are several options. That are "+keys.toString()+".";
 		var option = 1;
 		keys.forEach(function(key){
 			responseText += ", Option "+option+" "+key+" "+careerConfig['ssc'][key].Description;
 			if(careerConfig['ssc'][key].courses){
-				responseText += " Courses "	
+				responseText += " courses from this stream are "+careerConfig['ssc'][key].courses.toString();
 			}else if(careerConfig['ssc'][key].jobs){
-				responseText += " Jobs "	
-			}
-			responseText += "from this stream are "+careerConfig['ssc'][key].courses.toString();
+				responseText += " jobs from this stream are "+careerConfig['ssc'][key].jobs.toString();
+			}			
 			option++;
 		});
 		console.log('response text',responseText);		
