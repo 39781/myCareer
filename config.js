@@ -14,12 +14,14 @@ module.exports = {
 		"Police Force":{"Description":"On the basis of physical test and written test, one can join as constable.","jobs":["Central Reserve Police Force (CRPF)"]},
 		"SSC":{"Description":"Staff Selection Commission (SSC) conducts some job examination for those who passed matriculation","jobs":["clerks"]}
 	},
-	"Intermediate":{
+	"intermediate":{
 		"mpc":{},
 		"cec":{},
 		"hec":{},
 		"bipc":{},
 	},
 	"degree":{
+	},
+	"pg":{
 	}
 }

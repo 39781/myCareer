@@ -34,7 +34,7 @@ router.post('/botHandler',function(req, res){
 		case 'IntentRequest':processRequest = intentRequest;break;
 		case 'SessionEndedRequest':processRequest = sessionEndedRequest;break;
 	}
-	processRequest(req, res)
+	processRequest(req)
 	.then((resp)=>{
 		res.json(resp).end();	
 	})
@@ -44,15 +44,12 @@ router.post('/botHandler',function(req, res){
 	
 	
 });
-function sessionEndedRequest(req, res){
+function sessionEndedRequest(req){
 }
-function intentRequest(req, res){
-	return new Promise(function(resolve, reject){	
-		findCourseName(req.body.request.intent.name.toLowerCase())
-		.then((courseName)=>{
-			return getCareerResponse(courseName);
-		})
-		.then((resp)=>{
+function intentRequest(req){
+	return new Promise(function(resolve, reject){			
+		getCareerResponse(req.body.request.intent.slots.course.value.toLowerCase());
+		then((resp)=>{
 			console.log(resp);
 			plainTextResponse.response.outputSpeech.text = resp;
 			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp+"</speak>";
@@ -67,7 +64,8 @@ function intentRequest(req, res){
 		});	
 	});
 }
-function launchRequest(req, res){
+
+function launchRequest(req){
 	return new Promise(function(resolve, reject){
 		plainTextResponse.response.outputSpeech.text = "Hai I am MyCareer Alexa bot. I can guide about your career, please tell which course you completed."
 		plainTextResponse.response.outputSpeech.ssml = "<speak>Hai I am MyCareer Alexa bot. I can guide about your career, please tell which course you completed.</speak>"
@@ -75,17 +73,7 @@ function launchRequest(req, res){
 		resolve(plainTextResponse);
 	});
 }
-function findCourseName(intentName){
-	return new Promise(function(resolve, reject){	
-		switch(intentName){
-			case 'matriculation':resolve('ssc');break;
-			case 'intermediate':resolve('intermediate');break;
-			case 'graduation':resolve('degree');break;
-			case 'postgraduation':resolve('pg');break;
-			case 'diploma':resolve('diploma');break;
-		}		
-	});
-}
+
 function getCareerResponse(courseName){
 	return new Promise(function(resolve, reject){		
 		var keys  = Object.keys(careerConfig[courseName]);
