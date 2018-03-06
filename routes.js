@@ -27,26 +27,45 @@ var plainTextResponse = {
 router.post('/botHandler',function(req, res){
 	//console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
 	//console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
-	return findCourseName(req.body.request.intent.name.toLowerCase())
-	.then((courseName)=>{
-		return getCareerResponse(courseName);
-	})
-	.then((resp)=>{
-		console.log(resp);
-		plainTextResponse.response.outputSpeech.text = resp;
-		plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp+"</speak>";
-		console.log(plainTextResponse);
-		res.json(plainTextResponse).end();		
-	})
-	.catch((err)=>{
-		var error = JSON.stringify(err);
-		plainTextResponse.response.outputSpeech.text = error;
-		plainTextResponse.response.outputSpeech.ssml = "<speak>"+error+"</speak>";
-		res.json(plainTextResponse).end();
-	});	
+	var jsonResp;
+	switch(req.body.request.type){
+		case 'LaunchRequest':jsonResp = launchRequest(req, res);break;
+		case 'IntentRequest':jsonResp = intentRequest(req, res);break;
+		case 'SessionEndedRequest':jsonResp = sessionEndedRequest(req, res);break;
+	}
+	res.json(jsonResp).end();
 	
 });
-
+function sessionEndedRequest(){
+}
+function intentRequest(){
+	return new Promise(function(resolve, reject){	
+		findCourseName(req.body.request.intent.name.toLowerCase())
+		.then((courseName)=>{
+			return getCareerResponse(courseName);
+		})
+		.then((resp)=>{
+			console.log(resp);
+			plainTextResponse.response.outputSpeech.text = resp;
+			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp+"</speak>";
+			console.log(plainTextResponse);
+			resolve(plainTextResponse);		
+		})
+		.catch((err)=>{
+			var error = JSON.stringify(err);
+			plainTextResponse.response.outputSpeech.text = error;
+			plainTextResponse.response.outputSpeech.ssml = "<speak>"+error+"</speak>";
+			resolve(plainTextResponse);
+		});	
+	});
+}
+function launchRequest(){
+	return new Promise(function(resolve, reject){
+		plainTextResponse.response.outputSpeech.text = "Hai I am MyCareer Alexa bot. I can guide about your career, please tell which course you completed."
+		plainTextResponse.response.outputSpeech.ssml = "<speak>Hai I am MyCareer Alexa bot. I can guide about your career, please tell which course you completed.</speak>"
+		resolve(plainTextResponse);
+	});
+}
 function findCourseName(intentName){
 	return new Promise(function(resolve, reject){	
 		switch(intentName){
