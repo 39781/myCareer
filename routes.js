@@ -91,7 +91,13 @@ function getCareerResponse(courseName){
 		var responseText = "After SSC, there are several options. That are "+keys.toString()+".";
 		var option = 1;
 		keys.forEach(function(key){
-			responseText += ", Option "+option+" "+key+" "+careerConfig['ssc'][key].Description+" Courses from this stream are "+careerConfig['ssc'][key].courses.toString();
+			responseText += ", Option "+option+" "+key+" "+careerConfig['ssc'][key].Description;
+			if(careerConfig['ssc'][key].courses){
+				responseText += " Courses "	
+			}else if(careerConfig['ssc'][key].jobs){
+				responseText += " Jobs "	
+			}
+			responseText += "from this stream are "+careerConfig['ssc'][key].courses.toString();
 			option++;
 		});
 		console.log(responseText);		
