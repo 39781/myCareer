@@ -11,7 +11,7 @@ router.get('/',function(req, res){
 router.post('/botHandler',function(req, res){
 	//console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
 	console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
-	findCourseName(req.body.intent.name.toLowerCase())
+	findCourseName(req.body.request.intent.name.toLowerCase())
 	.then((courseName)=>{
 		return getCareerResponse(courseName);
 	})
