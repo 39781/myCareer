@@ -27,13 +27,20 @@ var plainTextResponse = {
 router.post('/botHandler',function(req, res){
 	//console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
 	//console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
-	var jsonResp;
+	var processRequest;
 	switch(req.body.request.type){
-		case 'LaunchRequest':jsonResp = launchRequest(req, res);break;
-		case 'IntentRequest':jsonResp = intentRequest(req, res);break;
-		case 'SessionEndedRequest':jsonResp = sessionEndedRequest(req, res);break;
+		case 'LaunchRequest':processRequest = launchRequest;break;
+		case 'IntentRequest':processRequest = intentRequestbreak;
+		case 'SessionEndedRequest':processRequest = sessionEndedRequest;break;
 	}
-	res.json(jsonResp).end();
+	processRequest(req, res)
+	.then((resp)=>{
+		res.json(resp).end();	
+	})
+	.catch((err)=>{
+		res.json(err).end();
+	});
+	
 	
 });
 function sessionEndedRequest(req, res){
