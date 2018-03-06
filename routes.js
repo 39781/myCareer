@@ -83,17 +83,19 @@ function getCareerResponse(courseName){
 		var ssmlResponse = responseText;
 		var option = 1;
 		keys.forEach(function(key){
-			responseText += ", Option "+option+" "+key+" "+careerConfig['ssc'][key].Description;
+			optionsTxt = ", Option "+option+" "+key+" "+careerConfig['ssc'][key].Description;
 			
 			if(careerConfig['ssc'][key].courses){
-				responseText += " courses from this stream are "+careerConfig['ssc'][key].courses.toString();
+				optionsTxt += " courses from this stream are "+careerConfig['ssc'][key].courses.toString();
 			}else if(careerConfig['ssc'][key].jobs){
-				responseText += " jobs from this stream are "+careerConfig['ssc'][key].jobs.toString();
+				optionsTxt += " jobs from this stream are "+careerConfig['ssc'][key].jobs.toString();
 			}			
-			ssmlResponse = "<break time=0.3s>"+responseText+"</break>";
+			responseText += optionsTxt;
+			ssmlResponse += "<break time=0.3s>"+optionsTxt+"</break>";
+			console.log(ssmlResponse);
 			option++;
 		});
-		console.log('response text',responseText);		
+		console.log('response text',ssmlResponse);		
 		resolve({text:responseText,ssml:ssmlResponse});
 		/*resolve({			
 			"response": {
