@@ -100,7 +100,7 @@ function getCareerResponse(courseName){
 			responseText += "from this stream are "+careerConfig['ssc'][key].courses.toString();
 			option++;
 		});
-		console.log(responseText);		
+		console.log('response text',responseText);		
 		resolve(responseText);
 		/*resolve({			
 			"response": {
