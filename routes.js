@@ -52,8 +52,8 @@ function intentRequest(req){
 		getCareerResponse(req.body.request.intent.slots.course.value.toLowerCase())
 		.then((resp)=>{
 			console.log(resp);
-			plainTextResponse.response.outputSpeech.text = resp;
-			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp+"</speak>";
+			plainTextResponse.response.outputSpeech.text = resp.text;
+			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp.ssml+"</speak>";
 			console.log(plainTextResponse);
 			resolve(plainTextResponse);		
 		})
@@ -80,18 +80,21 @@ function getCareerResponse(courseName){
 			console.log(courseName);
 		var keys  = Object.keys(careerConfig[courseName]);
 		var responseText = "After SSC, there are several options. That are "+keys.toString()+".";
+		var ssmlResponse = responseText;
 		var option = 1;
 		keys.forEach(function(key){
 			responseText += ", Option "+option+" "+key+" "+careerConfig['ssc'][key].Description;
+			
 			if(careerConfig['ssc'][key].courses){
 				responseText += " courses from this stream are "+careerConfig['ssc'][key].courses.toString();
 			}else if(careerConfig['ssc'][key].jobs){
 				responseText += " jobs from this stream are "+careerConfig['ssc'][key].jobs.toString();
 			}			
+			ssmlResponse = "<break time=0.3s>"+responseText+"</break>";
 			option++;
 		});
 		console.log('response text',responseText);		
-		resolve(responseText);
+		resolve({text:responseText,ssml:ssmlResponse});
 		/*resolve({			
 			"response": {
 				"outputSpeech": {
