@@ -49,8 +49,8 @@ function sessionEndedRequest(req){
 function intentRequest(req){
 	return new Promise(function(resolve, reject){	
 		console.log(req.body.request.intent.slots.course.value);
-		getCareerResponse(req.body.request.intent.slots.course.value.toLowerCase());
-		then((resp)=>{
+		getCareerResponse(req.body.request.intent.slots.course.value.toLowerCase())
+		.then((resp)=>{
 			console.log(resp);
 			plainTextResponse.response.outputSpeech.text = resp;
 			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp+"</speak>";
