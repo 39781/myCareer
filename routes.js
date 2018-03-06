@@ -47,24 +47,11 @@ function getCareerResponse(courseName){
 			option++;
 		});
 		console.log(responseText);		
-		resolve({
-			"version": "1.0",
-			"sessionAttributes": {
-				"supportedHoriscopePeriods": {
-				  "daily": true,
-				  "weekly": false,
-				  "monthly": false
-				}
-			},
+		resolve({			
 			"response": {
 				"outputSpeech": {
 				  "type": "PlainText",
 				  "text": responseText
-				},
-				"card": {
-				  "type": "Simple",
-				  "title": "Career after SSC",
-				  "content": responseText
 				},
 				"reprompt": {
 				  "outputSpeech": {
