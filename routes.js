@@ -26,7 +26,7 @@ var plainTextResponse = {
 
 router.post('/botHandler',function(req, res){
 	//console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
-	console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
+	//console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
 	return findCourseName(req.body.request.intent.name.toLowerCase())
 	.then((courseName)=>{
 		return getCareerResponse(courseName);
@@ -35,6 +35,7 @@ router.post('/botHandler',function(req, res){
 		console.log(resp);
 		plainTextResponse.response.outputSpeech.text = resp;
 		plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp+"</speak>";
+		console.log(plainTextResponse);
 		res.json(plainTextResponse).end();		
 	})
 	.catch((err)=>{
