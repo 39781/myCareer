@@ -6,7 +6,7 @@ module.exports = {
 		},
 		"diploma":{
 			"Description":"It is also called polytechnic. It diploma level engineering courses.",
-			"courses":["Computer Science Engineering","Mechanical Engineering","Civil Engineering","Electronics & Communication Engineering", "Electrical Engineering"]
+			"courses":["Computer Science Engineering","Mechanical Engineering","Civil Engineering","Electronics and Communication Engineering", "Electrical Engineering"]
 		},
 		"ITI":{"Description":"","courses":""},
 		"Army":{"Description":"","courses":""},
