@@ -12,6 +12,7 @@ var plainTextResponse = {
 				"outputSpeech": {
 				  "type": "PlainText",
 				  "text": ""
+				  "ssml":""
 				},
 				"reprompt": {
 				  "outputSpeech": {
@@ -33,10 +34,13 @@ router.post('/botHandler',function(req, res){
 	.then((resp)=>{
 		console.log(resp);
 		plainTextResponse.response.outputSpeech.text = resp;
+		plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp+"</speak>";
 		res.json(plainTextResponse).end();		
 	})
 	.catch((err)=>{
-		plainTextResponse.response.outputSpeech.text = JSON.stringify(err);
+		var error = JSON.stringify(err);
+		plainTextResponse.response.outputSpeech.text = error;
+		plainTextResponse.response.outputSpeech.ssml = "<speak>"+error+"</speak>";
 		res.json(plainTextResponse).end();
 	});	
 	
