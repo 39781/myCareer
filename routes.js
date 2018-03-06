@@ -1,28 +1,44 @@
 var express 		= require('express');
 var router			= express.Router();	 
 var careerConfig	= require("./config");	
+
 router.get('/',function(req, res){
 	console.log('req received');
 	res.send("req received");
 	res.end();
 })
-
+var plainTextResponse = {			
+			"response": {
+				"outputSpeech": {
+				  "type": "PlainText",
+				  "text": ""
+				},
+				"reprompt": {
+				  "outputSpeech": {
+					"type": "PlainText",
+					"text": "Can I help you with anything else?"
+				  }
+				},
+				"shouldEndSession": false
+			}
+		}
 
 router.post('/botHandler',function(req, res){
 	//console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
 	console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
-	findCourseName(req.body.request.intent.name.toLowerCase())
+	return findCourseName(req.body.request.intent.name.toLowerCase())
 	.then((courseName)=>{
 		return getCareerResponse(courseName);
 	})
 	.then((resp)=>{
 		console.log(resp);
-		res.json(resp).end();		
+		plainTextResponse.response.outputSpeech.text = resp;
+		res.json(plainTextResponse).end();		
 	})
 	.catch((err)=>{
-		
-	});
-	res.end();
+		plainTextResponse.response.outputSpeech.text = JSON.stringify(err);
+		res.json(plainTextResponse).end();
+	});	
 	
 });
 
@@ -47,7 +63,8 @@ function getCareerResponse(courseName){
 			option++;
 		});
 		console.log(responseText);		
-		resolve({			
+		resolve(responseText);
+		/*resolve({			
 			"response": {
 				"outputSpeech": {
 				  "type": "PlainText",
@@ -61,7 +78,7 @@ function getCareerResponse(courseName){
 				},
 				"shouldEndSession": false
 			}
-		});		
+		});*/		
 	})
 }
 
