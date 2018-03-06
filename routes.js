@@ -36,9 +36,9 @@ router.post('/botHandler',function(req, res){
 	res.json(jsonResp).end();
 	
 });
-function sessionEndedRequest(){
+function sessionEndedRequest(req, res){
 }
-function intentRequest(){
+function intentRequest(req, res){
 	return new Promise(function(resolve, reject){	
 		findCourseName(req.body.request.intent.name.toLowerCase())
 		.then((courseName)=>{
@@ -59,10 +59,11 @@ function intentRequest(){
 		});	
 	});
 }
-function launchRequest(){
+function launchRequest(req, res){
 	return new Promise(function(resolve, reject){
 		plainTextResponse.response.outputSpeech.text = "Hai I am MyCareer Alexa bot. I can guide about your career, please tell which course you completed."
 		plainTextResponse.response.outputSpeech.ssml = "<speak>Hai I am MyCareer Alexa bot. I can guide about your career, please tell which course you completed.</speak>"
+		console.log(plainTextResponse);
 		resolve(plainTextResponse);
 	});
 }
