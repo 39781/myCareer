@@ -1,7 +1,7 @@
-var myCareer = {
+module.exports = {
 	"ssc":{
 		"intermediate":{
-			"Description":"This course provides various streams like Science, Commerce, Arts",
+			"Description":"This course provides various streams like Science, Commerce, Arts.",
 			"courses":["MPC - science stream, BiPC - science stream", "HEC - arts stream", "CEC - commerce stream"]
 		},
 		"diploma":{
