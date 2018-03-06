@@ -26,7 +26,7 @@ var plainTextResponse = {
 
 router.post('/botHandler',function(req, res){
 	//console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
-	//console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
+	console.log('Dialogflow Request body: ' + JSON.stringify(req.body));	
 	console.log(req.body.request.type);
 	var processRequest;
 	switch(req.body.request.type){
