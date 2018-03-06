@@ -30,7 +30,7 @@ router.post('/botHandler',function(req, res){
 	var processRequest;
 	switch(req.body.request.type){
 		case 'LaunchRequest':processRequest = launchRequest;break;
-		case 'IntentRequest':processRequest = intentRequestbreak;
+		case 'IntentRequest':processRequest = intentRequest;break;
 		case 'SessionEndedRequest':processRequest = sessionEndedRequest;break;
 	}
 	processRequest(req, res)
