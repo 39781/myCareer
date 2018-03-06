@@ -11,7 +11,7 @@ var plainTextResponse = {
 			"response": {
 				"outputSpeech": {
 				  "type": "PlainText",
-				  "text": ""
+				  "text": "",
 				  "ssml":""
 				},
 				"reprompt": {
