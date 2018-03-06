@@ -83,7 +83,7 @@ function getCareerResponse(courseName){
 		var ssmlResponse = responseText;
 		var option = 1;
 		keys.forEach(function(key){
-			optionsTxt = ", Option "+option+" "+key+" "+careerConfig['ssc'][key].Description;
+			optionsTxt = ", Option "+option+"  "+key+" "+careerConfig['ssc'][key].Description;
 			
 			if(careerConfig['ssc'][key].courses){
 				optionsTxt += " courses from this stream are "+careerConfig['ssc'][key].courses.toString();
@@ -91,7 +91,7 @@ function getCareerResponse(courseName){
 				optionsTxt += " jobs from this stream are "+careerConfig['ssc'][key].jobs.toString();
 			}			
 			responseText += optionsTxt;
-			ssmlResponse += "<break time=0.3s>"+optionsTxt+"</break>";
+			ssmlResponse += "<break time=0.5s>"+optionsTxt+"</break>";
 			console.log(ssmlResponse);
 			option++;
 		});
