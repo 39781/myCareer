@@ -17,7 +17,8 @@ var plainTextResponse = {
 				"reprompt": {
 				  "outputSpeech": {
 					"type": "PlainText",
-					"text": "Can I help you with anything else?"
+					"text": "Can I help you with anything else?",
+					"ssml":"<speak>Can I help you with anything else?</speak>",
 				  }
 				},
 				"shouldEndSession": false
@@ -58,7 +59,7 @@ function intentRequest(req){
 		.then((resp)=>{
 			console.log(resp);
 			plainTextResponse.response.outputSpeech.text = resp.text;
-			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp.ssml+"</speak>";
+			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp.ssml+"</speak>";			
 			console.log(plainTextResponse);
 			resolve(plainTextResponse);		
 		})
