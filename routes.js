@@ -45,6 +45,9 @@ router.post('/botHandler',function(req, res){
 	
 });
 function sessionEndedRequest(req){
+	plainTextResponse.response.outputSpeech.text = 'Sorry, I cannot understand Try Again';
+	plainTextResponse.response.outputSpeech.ssml = '<speak>Sorry, I cannot understand Try Again</speak>';
+	resolve(plainTextResponse);
 }
 function intentRequest(req){
 	return new Promise(function(resolve, reject){	
