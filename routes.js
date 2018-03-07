@@ -56,19 +56,26 @@ function sessionEndedRequest(req){
 function intentRequest(req){
 	return new Promise(function(resolve, reject){	
 		console.log(req.body.request.intent.slots.course.value);
-		getCareerResponse(req.body.request.intent.slots.course.value.toLowerCase())
-		.then((resp)=>{
-			console.log(resp);
-			plainTextResponse.response.outputSpeech.text = resp.text;
-			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp.ssml+"</speak>";						
-			resolve(plainTextResponse);		
-		})
-		.catch((err)=>{
-			var error = JSON.stringify(err);
-			plainTextResponse.response.outputSpeech.text = error;
-			plainTextResponse.response.outputSpeech.ssml = "<speak>"+error+"</speak>";
+		if(req.body.request.intent.name == 'AMAZON.CancelIntent' || req.body.request.intent.name == 'AMAZON.StopIntent'){
+			plainTextResponse.response.outputSpeech.text = "Thank you for using me, good bye ";
+			plainTextResponse.response.outputSpeech.ssml = "<speak>Thank you for using me, good bye</speak>";						
+			plainTextResponse.response.shouldEndSession = true;
 			resolve(plainTextResponse);
-		});	
+		}else{
+			getCareerResponse(req.body.request.intent.slots.course.value.toLowerCase())
+			.then((resp)=>{
+				console.log(resp);
+				plainTextResponse.response.outputSpeech.text = resp.text;
+				plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp.ssml+"</speak>";						
+				resolve(plainTextResponse);		
+			})
+			.catch((err)=>{
+				var error = JSON.stringify(err);
+				plainTextResponse.response.outputSpeech.text = error;
+				plainTextResponse.response.outputSpeech.ssml = "<speak>"+error+"</speak>";
+				resolve(plainTextResponse);
+			});	
+		}
 	});
 }
 
