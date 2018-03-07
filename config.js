@@ -42,14 +42,14 @@ module.exports = {
 		"Teaching":{
 			"Description":"Teaching is another option for +2 students. To become a nursery or primary teacher, one can go for Nursery Teachers Training or Certificate and Diploma courses in teaching, after your 10+2 stream",
 			"courses":["D.ED"]
-		}
+		},
 		"Commerce":{
 			"Description":"Students who have taken up commerce stream in intermediate, have a good future in banking and financial institutions. There are various subjects studied under commerce stream some being theoretical like Business Law and others being practical like Financial accounting, Business finance, Auditing, Taxation etc",
 			"courses":["Diploma Programs Travel & Tourism, Hotel Management, Air Hostess & Flight Steward"," Degree programs B.Com,B.Com (Honors),BBA,BBM,BBA- LLB,BA - LLB,BCA,B.Com (Computer),BA","Professional Programs - CS, CA, ICWA, CFA"]
 		},
 		"Arts":{
 			"Description":"For intermediate arts students, Variety of creative courses are awaiting Arts/ Humanities students after their 12th grade.",
-			"courses":"courses":["Diploma Programs Foreign Language,Travel & Tourism,Hotel Management,Air Hostess & Flight Steward,Interior Designing,Event Management"," Degree programs B.A (Bachelor of Arts),BBA,BBM,Bachelor of Library Science,Bachelor of Social Work,Bachelor of Journalism,BFA (Bachelor of Fine Arts),LLB (Bachelor of Law),BBA- LLB,B.Des","Professional Programs - CS, CA, ICWA"]
+			"courses":["Diploma Programs Foreign Language,Travel & Tourism,Hotel Management,Air Hostess & Flight Steward,Interior Designing,Event Management"," Degree programs B.A (Bachelor of Arts),BBA,BBM,Bachelor of Library Science,Bachelor of Social Work,Bachelor of Journalism,BFA (Bachelor of Fine Arts),LLB (Bachelor of Law),BBA- LLB,B.Des","Professional Programs - CS, CA, ICWA"]
 		},
 		"Science":{
 			"Description":"For intermediate science students, Hundreds of career options are available for 10+2 science students. The major advantage of +2 science students is that they can switch to other careers i.e arts, humanities or even to commerce",
