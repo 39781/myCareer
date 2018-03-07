@@ -79,7 +79,7 @@ function getCareerResponse(courseName){
 	return new Promise(function(resolve, reject){
 			console.log(courseName);
 		var keys  = Object.keys(careerConfig[courseName]);
-		var responseText = "After SSC, there are several options. That are "+keys.toString()+".";
+		var responseText = "After "+courseName+" there are several options. That are "+keys.toString()+".";
 		var ssmlResponse = responseText;
 		var option = 1;
 		keys.forEach(function(key){
