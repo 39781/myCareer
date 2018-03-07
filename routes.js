@@ -90,24 +90,26 @@ function getCareerResponse(courseName){
 			case 'degree':case 'graduation':courseName = 'degree';break;
 			case 'pg':case 'post graduation':courseName = 'pg';break;
 		}			
+		console.log(courseName);
 		var keys  = Object.keys(careerConfig[courseName]);
+		console.log(keys);
 		var responseText = "After "+courseName+" there are several options. That are "+keys.toString()+".";
 		var ssmlResponse = responseText;
-		var option = 1;
+		var option = 1;		
 		keys.forEach(function(key){
-			optionsTxt = ", Option "+option+"  "+key+" "+careerConfig['ssc'][key].Description;
-			
-			if(careerConfig['ssc'][key].courses){
-				optionsTxt += " courses from this stream are "+careerConfig['ssc'][key].courses.toString();
-			}else if(careerConfig['ssc'][key].jobs){
-				optionsTxt += " jobs from this stream are "+careerConfig['ssc'][key].jobs.toString();
+			console
+			optionsTxt = ", Option "+option+"  "+key+" "+careerConfig[courseName][key].Description;			
+			if(careerConfig[courseName][key].courses){
+				optionsTxt += " courses from this stream are "+careerConfig[courseName][key].courses.toString();
+			}else if(careerConfig[courseName][key].jobs){
+				optionsTxt += " jobs from this stream are "+careerConfig[courseName][key].jobs.toString();
 			}			
 			responseText += optionsTxt;
 			ssmlResponse += "<break time=0.5s>"+optionsTxt+"</break>";
 			console.log(ssmlResponse);
 			option++;
-		});
-		console.log('response text',ssmlResponse);		
+		});		
+		console.log('hari','response text',ssmlResponse);		
 		resolve({text:responseText,ssml:ssmlResponse});
 		/*resolve({			
 			"response": {
