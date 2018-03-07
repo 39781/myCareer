@@ -37,6 +37,7 @@ router.post('/botHandler',function(req, res){
 	}
 	processRequest(req)
 	.then((resp)=>{
+		console.log(resp);
 		res.json(resp).end();	
 	})
 	.catch((err)=>{
@@ -59,8 +60,7 @@ function intentRequest(req){
 		.then((resp)=>{
 			console.log(resp);
 			plainTextResponse.response.outputSpeech.text = resp.text;
-			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp.ssml+"</speak>";			
-			console.log(plainTextResponse);
+			plainTextResponse.response.outputSpeech.ssml = "<speak>"+resp.ssml+"</speak>";						
 			resolve(plainTextResponse);		
 		})
 		.catch((err)=>{
