@@ -84,6 +84,12 @@ function launchRequest(req){
 function getCareerResponse(courseName){
 	return new Promise(function(resolve, reject){
 			console.log(courseName);
+		switch(courseName.toLowerCase()){
+			case 'ssc':case 'tenth':case 'matriculation':courseName = 'ssc';break;
+			case 'inter':case 'intermediate':case 'plus two':case 'plus 2':courseName = 'intermediate';break;
+			case 'degree':case 'graduation':courseName = 'degree';break;
+			case 'pg':case 'post graduation':courseName = 'pg';break;
+		}			
 		var keys  = Object.keys(careerConfig[courseName]);
 		var responseText = "After "+courseName+" there are several options. That are "+keys.toString()+".";
 		var ssmlResponse = responseText;
